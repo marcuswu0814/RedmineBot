@@ -7,3 +7,4 @@ The changelog for `RedmineBot`.
 ## Feature
 
 - Adding Travis CI build. [#1](https://github.com/marcuswu0814/RedmineBot/pull/1)
+- Adding Travis CI and Codebet label. [#3](https://github.com/marcuswu0814/RedmineBot/pull/3)
