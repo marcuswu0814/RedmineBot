@@ -3,9 +3,9 @@ import Commander
 import PathKit
 import Rainbow
 
-class SetupCommand: CommandProtocol {
+public class SetupCommand: CommandProtocol {
     
-    static func make() -> CommandType {
+    public static func make() -> CommandType {
         let setupCommand = command(Argument<String>("redmineUrl", description: "Your redmine server URL"),
                                    Argument<String>("apiAccessKey", description: "Your access key from account setting")
         ) { (redmineUrl, apiAccessKey) in

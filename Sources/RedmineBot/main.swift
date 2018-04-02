@@ -1,5 +1,5 @@
 import Commander
-import Foundation
+import RedmineBotCore
 
 let version = "0.0.1"
 

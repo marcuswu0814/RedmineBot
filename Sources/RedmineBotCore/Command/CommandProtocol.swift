@@ -1,6 +1,6 @@
 import Commander
 
-protocol CommandProtocol {
+public protocol CommandProtocol {
     
     static func make() -> CommandType
     

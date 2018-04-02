@@ -2,27 +2,9 @@ import Foundation
 import Commander
 import PathKit
 
-extension Config {
+public class CommentCommand: CommandProtocol {
     
-    static func readFromPath(_ path: Path) -> Config {
-        guard let redmineConfig = try? path.read() else {
-            System.fatalError("Load config file fail.")
-        }
-        
-        let jsonDecoder = JSONDecoder()
-        
-        guard let config = try? jsonDecoder.decode(Config.self, from: redmineConfig) else {
-            System.fatalError("Config file JSON decode fail.")
-        }
-        
-        return config
-    }
-    
-}
-
-class CommentCommand: CommandProtocol {
-    
-    static func make() -> CommandType {
+    public static func make() -> CommandType {
         let commentCommand = command(Argument<Int>("issueNumber", description: "Comment to issue"),
                                      Argument<String>("authorName", description: "Commit author name"),
                                      Argument<String>("content", description: "Message content")

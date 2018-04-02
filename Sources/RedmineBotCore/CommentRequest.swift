@@ -3,11 +3,6 @@ import Alamofire
 import Stencil
 import PathKit
 
-struct Config: Codable {
-    let redmineUrl: String
-    let apiAccessKey: String
-}
-
 struct CommentContext {
     let content: String
     let authorName: String
