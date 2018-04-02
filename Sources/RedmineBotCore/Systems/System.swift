@@ -1,5 +1,7 @@
 public protocol SystemProtocol {
     
+    func printNormal(_ string: String)
+    
     func printSuccess(_ string: String)
     
     func printWarning(_ string: String)
@@ -10,8 +12,8 @@ public protocol SystemProtocol {
 
 public struct System: SystemProtocol {
     
-    public init() {
-        
+    public func printNormal(_ string: String) {
+        print(string)
     }
     
     public func printSuccess(_ string: String) {
