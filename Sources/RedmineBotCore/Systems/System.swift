@@ -1,15 +1,31 @@
-struct System {
+public protocol SystemProtocol {
     
-    static func printSuccess(_ string: String) {
+    func printSuccess(_ string: String)
+    
+    func printWarning(_ string: String)
+    
+    func printFatalError(_ string: String) -> Never
+    
+}
+
+public struct System: SystemProtocol {
+    
+    public init() {
+        
+    }
+    
+    public func printSuccess(_ string: String) {
         print(string.green)
     }
     
-    static func printWarning(_ string: String) {
+    public func printWarning(_ string: String) {
         print("⚠️" + string.yellow)
     }
     
-    static func fatalError(_ string: String) -> Never {
+    // Swift bug: https://bugs.swift.org/browse/SR-2729
+    // Compiler warning `Will never be executed`/
+    public func printFatalError(_ string: String) -> Never  {
         fatalError("💥" + string.red)
     }
-    
+  
 }

@@ -23,6 +23,9 @@ public class SetupCommand: CommandProtocol {
 
 class SetupCommandAction {
     
+    lazy var system: SystemProtocol = {
+        return System()
+    }()
     var config: Config
     var configPath: Path
     var defaultTemplatePath: Path
@@ -44,17 +47,17 @@ class SetupCommandAction {
         jsonEncoder.outputFormatting = .prettyPrinted
         
         guard let encodeData = try? jsonEncoder.encode(config) else {
-            System.fatalError("Config encode to json fail.")
+            system.printFatalError("Config encode to json fail.")
         }
         
         guard let encodeString = String(data: encodeData, encoding: .utf8) else {
-            System.fatalError("Data encode to json string fail.")
+            system.printFatalError("Data encode to json string fail.")
         }
         
         do {
             try configPath.write(encodeString)
         } catch {
-            System.fatalError("Witre config file to path \(configPath) fail.")
+            system.printFatalError("Witre config file to path \(configPath) fail.")
         }
     }
     
@@ -62,13 +65,13 @@ class SetupCommandAction {
         do {
             try defaultTemplatePath.write(DefaultTemplate.comment())
         } catch {
-            System.fatalError("Create default template file to path \(defaultTemplatePath) fail.")
+            system.printFatalError("Create default template file to path \(defaultTemplatePath) fail.")
         }
     }
     
     private func checkSetupFileExist() {
         if defaultTemplatePath.exists && configPath.exists {
-            System.printSuccess("Setup success! 🎉🎉")
+            system.printSuccess("Setup success! 🎉🎉")
         }
     }
 
