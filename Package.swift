@@ -14,6 +14,12 @@ let package = Package(
     targets: [
         .target(
             name: "RedmineBot",
-            dependencies: ["Alamofire", "Rainbow", "Commander", "Stencil"])
+            dependencies: ["RedmineBotCore"]),
+        .target(
+            name: "RedmineBotCore",
+            dependencies: ["Alamofire", "Rainbow", "Commander", "Stencil"]),
+        .testTarget(
+            name: "RedmineBotTest",
+            dependencies: ["RedmineBotCore"])
     ]
 )
