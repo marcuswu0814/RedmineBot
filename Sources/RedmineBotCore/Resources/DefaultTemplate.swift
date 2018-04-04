@@ -6,7 +6,7 @@ import Foundation
 
 struct DefaultTemplate {
     
-    public static func comment() -> String {
+    static func comment() -> String {
         let template =
         """
         {{ content }}
@@ -18,5 +18,23 @@ struct DefaultTemplate {
         
         return template
     }
-
+    
+    static func postCommitHook() -> String {
+        let hook =
+        """
+        redmine-bot runPostCommitHook
+        """
+        
+        return hook
+    }
+    
+    static func postRewriteHook() -> String {
+        let hook =
+        """
+        redmine-bot runPostRewriteHook
+        """
+        
+        return hook
+    }
+    
 }

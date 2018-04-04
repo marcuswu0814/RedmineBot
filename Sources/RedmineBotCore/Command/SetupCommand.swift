@@ -71,7 +71,7 @@ class SetupCommandAction {
     
     private func checkSetupFileExist() {
         if defaultTemplatePath.exists && configPath.exists {
-            system.printSuccess("Setup success! 🎉🎉")
+            system.printSuccess("Setup success!")
         }
     }
 

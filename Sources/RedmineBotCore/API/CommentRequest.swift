@@ -10,8 +10,8 @@ struct CommentContext {
 
 class CommentRequest: NSObject {
     
+    lazy var system: SystemProtocol = System()
     var config: Config
-    
     var runner = SwiftScriptRunner()
     
     init(_ config: Config) {
@@ -31,9 +31,7 @@ class CommentRequest: NSObject {
         let rendered = try? environment.renderTemplate(name: "Comment.template", context: context)
         
         guard let commentInfo = rendered else {
-            print("Rendered error! Check your template file first. 🙏".red)
-            
-            return
+            system.printFatalError("Rendered error! Check your template file first. 🙏")
         }
         
         let parameters: Parameters = ["issue": ["notes": commentInfo]]
@@ -46,10 +44,10 @@ class CommentRequest: NSObject {
             .validate(statusCode: 200..<300)
             .responseString { response in
                 if let error = response.error {
-                    print("Got some error. 🙇".red)
-                    print("\n\(error)")
+                    self.system.printWarning("Got some network error. 🙇")
+                    self.system.printWarning("Error: \n\(error)")
                 } else {
-                    print("Comment send success! 🎉🎉".green)
+                    self.system.printSuccess("Comment send success!")
                 }
                 
                 self.runner.unlock()

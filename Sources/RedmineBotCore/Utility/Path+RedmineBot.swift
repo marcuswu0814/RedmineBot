@@ -26,3 +26,11 @@ extension Path {
     }
     
 }
+
+extension Path {
+    
+    public func chmod(_ mode: String) {
+        _ = Bash.run("chmod", arguments: [mode, self.string])
+    }
+    
+}
