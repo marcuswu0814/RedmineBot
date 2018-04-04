@@ -1,8 +1,14 @@
 import Foundation
 
-public struct Bash {
+public protocol BashProtocol {
     
-    public func run(_ command: String, arguments: [String]?) -> String? {
+    static func run(_ command: String, arguments: [String]?) -> String?
+
+}
+
+public struct Bash: BashProtocol {
+    
+    public static func run(_ command: String, arguments: [String]?) -> String? {
         var args = [command]
         
         if let arguments = arguments {
@@ -12,7 +18,7 @@ public struct Bash {
         return shell(launchPath: "/usr/bin/env", arguments: args)
     }
 
-    private func shell(launchPath: String, arguments: [String]?) -> String? {
+    private static func shell(launchPath: String, arguments: [String]?) -> String? {
         let task = Process()
         task.launchPath = launchPath
 
