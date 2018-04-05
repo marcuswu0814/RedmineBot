@@ -28,11 +28,12 @@ class InstallHookCommandAction {
     lazy var postCommitHook = DefaultTemplate.postCommitHook()
     lazy var postRewriteHook = DefaultTemplate.postRewriteHook()
     
+    private(set) lazy var postCommitHookPath = gitHooksDirPath + Path("post-commit")
+    private(set) lazy var postRewriteHookPath = gitHooksDirPath + Path("post-rewrite")
+    
     private let pwd = Path.current
     private lazy var gitRepoPath = pwd + Path(".git")
     private lazy var gitHooksDirPath = gitRepoPath + Path("hooks")
-    private lazy var postCommitHookPath = gitHooksDirPath + Path("post-commit")
-    private lazy var postRewriteHookPath = gitHooksDirPath + Path("post-rewrite")
     
     func doAction() {
         checkGitRepo()

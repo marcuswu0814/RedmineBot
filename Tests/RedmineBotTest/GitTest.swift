@@ -5,35 +5,23 @@ import PathKit
 
 class GitTest: XCTestCase {
     
-    static let tempDir = Path("/tmp/RedminBot-gitTest")
-    static let userName = "Test User"
-    static let commitMessage = "Test Commit message"
-    
     override class func setUp() {
         super.setUp()
         
-        try? tempDir.mkdir()
-        
-        Path.current = tempDir
-        
-        _ = Bash.run("git", arguments: ["init"])
-        _ = Bash.run("git", arguments: ["config", "--local", "user.name", userName])
-        _ = Bash.run("touch", arguments: ["testFile"])
-        _ = Bash.run("git", arguments: ["add", "--all"])
-        _ = Bash.run("git", arguments: ["commit", "--m", commitMessage])
+        TempGitRepo.setUP()
     }
     
     func test__shuoldGetCurrentAuthorName() {
         let authorName = Git.authorName("")
         
-        XCTAssertTrue(authorName == GitTest.userName)
+        XCTAssertTrue(authorName == TempGitRepo.userName)
     }
     
     func test__shuoldGetCurrentCommitMessage() {
         let commitMessage = Git.commitMessage("")
         
-        let containsCommitMessage = commitMessage?.contains(GitTest.commitMessage)
-        let containsAuthorName = commitMessage?.contains(GitTest.userName)
+        let containsCommitMessage = commitMessage?.contains(TempGitRepo.commitMessage)
+        let containsAuthorName = commitMessage?.contains(TempGitRepo.userName)
 
         XCTAssertTrue(containsCommitMessage!)
         XCTAssertTrue(containsAuthorName!)
@@ -42,14 +30,13 @@ class GitTest: XCTestCase {
     func test__sholdGetCurrentCommitTitle() {
         let commitTitle = Git.commitTitle("")
 
-        let containsCommitTitle = commitTitle?.contains(GitTest.commitMessage)
+        let containsCommitTitle = commitTitle?.contains(TempGitRepo.commitMessage)
         
         XCTAssertTrue(containsCommitTitle!)
     }
  
     override class func tearDown() {
-        let tempDir = Path("/tmp/RedminBot-gitTest")
-        try? tempDir.delete()
+        TempGitRepo.tearDown()
         
         super.tearDown()
     }
