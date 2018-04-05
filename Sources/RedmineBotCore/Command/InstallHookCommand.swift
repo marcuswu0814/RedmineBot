@@ -82,7 +82,7 @@ class InstallHookCommandAction {
             let appendedPostCommit = file + "\n\n" + hookContent
             
             do {
-                try postCommitHookPath.write(appendedPostCommit)
+                try path.write(appendedPostCommit)
             } catch {
                 throw InstallHookCommandActionError.updateHookFileFail
             }
