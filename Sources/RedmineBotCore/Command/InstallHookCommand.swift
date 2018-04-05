@@ -65,31 +65,39 @@ class InstallHookCommandAction {
     
     private func installHook(to path: Path, hookContent: String) throws {
         if (path.exists) {
-            guard let file: String = try? path.read() else {
-                throw InstallHookCommandActionError.openExistsFileFail
-            }
-            
-            if file.range(of: hookContent) != nil {
-                system.printWarning("Hook \(path.lastComponent) already installed.")
-            } else {
-                let appendedPostCommit = file + "\n\n" + hookContent
-                
-                do {
-                    try postCommitHookPath.write(appendedPostCommit)
-                } catch {
-                    throw InstallHookCommandActionError.updateHookFileFail
-                }
-            }
+            try appendToExistHook(to: path, hookContent: hookContent)
         } else {
-            do {
-                try path.write(hookContent)
-            } catch {
-                throw InstallHookCommandActionError.createHookFileFail
-            }
-            
-            path.chmod("755")
-            system.printSuccess("Hook \(path.lastComponent) install to path \(path) success.")
+            try createHookFile(to: path, hookContent: hookContent)
         }
+    }
+    
+    private func appendToExistHook(to path: Path, hookContent: String) throws {
+        guard let file: String = try? path.read() else {
+            throw InstallHookCommandActionError.openExistsFileFail
+        }
+        
+        if file.range(of: hookContent) != nil {
+            system.printWarning("Hook \(path.lastComponent) already installed.")
+        } else {
+            let appendedPostCommit = file + "\n\n" + hookContent
+            
+            do {
+                try postCommitHookPath.write(appendedPostCommit)
+            } catch {
+                throw InstallHookCommandActionError.updateHookFileFail
+            }
+        }
+    }
+    
+    private func createHookFile(to path: Path, hookContent: String) throws {
+        do {
+            try path.write(hookContent)
+        } catch {
+            throw InstallHookCommandActionError.createHookFileFail
+        }
+        
+        path.chmod("755")
+        system.printSuccess("Hook \(path.lastComponent) install to path \(path) success.")
     }
     
 }
