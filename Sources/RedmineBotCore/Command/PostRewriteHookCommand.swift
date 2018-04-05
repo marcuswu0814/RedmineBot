@@ -5,13 +5,13 @@ import Commander
 public class PostRewriteHookCommand: CommandProtocol {
     
     public static func make() -> CommandType {
-        let postCommitHookCommand = command {
+        let postRewriteHookCommand = command {
             let action = PostRewriteHookCommandAction()
             
             action.doAction()
         }
         
-        return postCommitHookCommand
+        return postRewriteHookCommand
     }
     
 }
