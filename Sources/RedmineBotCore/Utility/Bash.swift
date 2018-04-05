@@ -22,7 +22,7 @@ public struct Bash: BashProtocol {
         let task = Process()
         task.launchPath = launchPath
 
-        if let args = arguments {
+        if let args = arguments?.filter({ $0 != "" }) {
             task.arguments = args
         }
 

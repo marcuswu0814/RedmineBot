@@ -13,7 +13,7 @@ public protocol GitProtocol {
 public struct Git: GitProtocol {
     
     public static func authorName(_ sha: String) -> String? {
-        return Bash.run("git", arguments: ["show", sha, "--quiet", "--pretty=format:\"%an\""])
+        return Bash.run("git", arguments: ["show", sha, "--quiet", "--pretty=format:%an"])
     }
     
     public static func commitTitle(_ sha: String) -> String? {
