@@ -20,12 +20,7 @@ class PostCommitHookCommandAction {
     
     lazy var system: SystemProtocol = System()
     lazy var git: GitProtocol.Type = Git.self
-    lazy var request: CommentRequest = {
-        let config = Config.readFromPath(Path.redmineConfig())
-        let request = CommentRequest(config)
-        
-        return request
-    }()
+    lazy var request = CommentRequest.defaultRequest()
     
     func doAction() {
         guard let commitLog = git.commitMessage("") else {

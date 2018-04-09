@@ -26,12 +26,7 @@ class PostRewriteHookCommandAction {
     lazy var provider = CommitsDiffReader()
     lazy var git: GitProtocol.Type = Git.self
     lazy var system: SystemProtocol = System()
-    lazy var request: CommentRequest = {
-        let config = Config.readFromPath(Path.redmineConfig())
-        let request = CommentRequest(config)
-        
-        return request
-    }()
+    lazy var request = CommentRequest.defaultRequest()
     
     func doAction() {
         let commitsDiff = provider.commitsDiff()

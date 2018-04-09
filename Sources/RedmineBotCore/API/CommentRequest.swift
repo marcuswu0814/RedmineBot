@@ -14,6 +14,12 @@ class CommentRequest: NSObject {
     var config: Config
     var runner = SwiftScriptRunner()
     
+    static func defaultRequest() -> CommentRequest {
+        let config = Config.readFromPath(Path.redmineConfig())
+        
+        return CommentRequest(config)
+    }
+    
     init(_ config: Config) {
         self.config = config
     }
