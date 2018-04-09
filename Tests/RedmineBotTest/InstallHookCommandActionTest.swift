@@ -14,23 +14,23 @@ class InstallHookCommandActionTest: XCTestCase {
         let sut = InstallHookCommandAction()
         sut.system = mockSystem
         
-        XCTAssertFalse(sut.postCommitHookPath.exists)
-        XCTAssertFalse(sut.postRewriteHookPath.exists)
+        XCTAssertFalse(sut.postCommitHookJob.hookPath.exists)
+        XCTAssertFalse(sut.postRewriteHookJob.hookPath.exists)
         
         sut.doAction()
         
-        XCTAssertTrue(sut.postCommitHookPath.exists)
-        XCTAssertTrue(sut.postRewriteHookPath.exists)
+        XCTAssertTrue(sut.postCommitHookJob.hookPath.exists)
+        XCTAssertTrue(sut.postRewriteHookJob.hookPath.exists)
         
-        let postRewriteInstallSuccess = try? sut.postRewriteHookPath.read().contains(sut.postRewriteHook)
-        let postCommitHookInstallSuccess = try? sut.postCommitHookPath.read().contains(sut.postCommitHook)
+        let postRewriteInstallSuccess = try? sut.postCommitHookJob.hookPath.read().contains(sut.postCommitHookJob.hookContent)
+        let postCommitHookInstallSuccess = try? sut.postRewriteHookJob.hookPath.read().contains(sut.postRewriteHookJob.hookContent)
         
         XCTAssertTrue(postRewriteInstallSuccess!)
         XCTAssertTrue(postCommitHookInstallSuccess!)
         
         addTeardownBlock {
-            try? sut.postCommitHookPath.delete()
-            try? sut.postRewriteHookPath.delete()
+            try? sut.postCommitHookJob.hookPath.delete()
+            try? sut.postRewriteHookJob.hookPath.delete()
         }
     }
     
@@ -42,8 +42,8 @@ class InstallHookCommandActionTest: XCTestCase {
         sut.doAction()
         sut.doAction()
         
-        let postRewriteAlreadyInstallSuccess = try? sut.postRewriteHookPath.read().contains(sut.postRewriteHook)
-        let postCommitHookAlreadyInstallSuccess = try? sut.postCommitHookPath.read().contains(sut.postCommitHook)
+        let postRewriteAlreadyInstallSuccess = try? sut.postRewriteHookJob.hookPath.read().contains(sut.postRewriteHookJob.hookContent)
+        let postCommitHookAlreadyInstallSuccess = try? sut.postCommitHookJob.hookPath.read().contains(sut.postCommitHookJob.hookContent)
         
         XCTAssertTrue(postRewriteAlreadyInstallSuccess!)
         XCTAssertTrue(postCommitHookAlreadyInstallSuccess!)
@@ -51,8 +51,8 @@ class InstallHookCommandActionTest: XCTestCase {
         XCTAssertTrue(mockSystem.printWarningBeInvoke)
 
         addTeardownBlock {
-            try? sut.postCommitHookPath.delete()
-            try? sut.postRewriteHookPath.delete()
+            try? sut.postRewriteHookJob.hookPath.delete()
+            try? sut.postCommitHookJob.hookPath.delete()
         }
     }
     
@@ -62,26 +62,26 @@ class InstallHookCommandActionTest: XCTestCase {
         sut.system = mockSystem
         sut.doAction()
         
-        try? sut.postRewriteHookPath.write("Replace already exist hook")
-        try? sut.postCommitHookPath.write("Replace already exist hook")
+        try? sut.postRewriteHookJob.hookPath.write("Replace already exist hook")
+        try? sut.postCommitHookJob.hookPath.write("Replace already exist hook")
         
-        let postRewriteHookReplaceSuccess = try? sut.postRewriteHookPath.read().contains("Replace already exist hook")
-        let postCommitHookReplaceSuccess = try? sut.postCommitHookPath.read().contains("Replace already exist hook")
+        let postRewriteHookReplaceSuccess = try? sut.postRewriteHookJob.hookPath.read().contains("Replace already exist hook")
+        let postCommitHookReplaceSuccess = try? sut.postCommitHookJob.hookPath.read().contains("Replace already exist hook")
         
         XCTAssertTrue(postRewriteHookReplaceSuccess!)
         XCTAssertTrue(postCommitHookReplaceSuccess!)
         
         sut.doAction()
 
-        let postRewriteAppendedSuccess = try? sut.postRewriteHookPath.read().contains(sut.postRewriteHook)
-        let postCommitHookAppendedSuccess = try? sut.postCommitHookPath.read().contains(sut.postCommitHook)
+        let postRewriteAppendedSuccess = try? sut.postRewriteHookJob.hookPath.read().contains(sut.postRewriteHookJob.hookContent)
+        let postCommitHookAppendedSuccess = try? sut.postCommitHookJob.hookPath.read().contains(sut.postCommitHookJob.hookContent)
         
         XCTAssertTrue(postRewriteAppendedSuccess!)
         XCTAssertTrue(postCommitHookAppendedSuccess!)
         
         addTeardownBlock {
-            try? sut.postCommitHookPath.delete()
-            try? sut.postRewriteHookPath.delete()
+            try? sut.postCommitHookJob.hookPath.delete()
+            try? sut.postRewriteHookJob.hookPath.delete()
         }
     }
     

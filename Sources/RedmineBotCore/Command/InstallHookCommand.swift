@@ -17,6 +17,7 @@ public class InstallHookCommand: CommandProtocol {
 }
 
 enum InstallHookCommandActionError: Error {
+    case gitRepoNotExist
     case openExistsFileFail
     case createHookFileFail
     case updateHookFileFail
@@ -25,41 +26,60 @@ enum InstallHookCommandActionError: Error {
 class InstallHookCommandAction {
     
     lazy var system: SystemProtocol = System()
-    lazy var postCommitHook = DefaultTemplate.postCommitHook()
-    lazy var postRewriteHook = DefaultTemplate.postRewriteHook()
     
-    private(set) lazy var postCommitHookPath = gitHooksDirPath + Path("post-commit")
-    private(set) lazy var postRewriteHookPath = gitHooksDirPath + Path("post-rewrite")
-    
-    private let pwd = Path.current
-    private lazy var gitRepoPath = pwd + Path(".git")
-    private lazy var gitHooksDirPath = gitRepoPath + Path("hooks")
+    lazy var postCommitHookJob = HookInstallJob(repoPath: Path.current + Path(".git"),
+                                                hookName: "post-commit",
+                                                hookContent: DefaultTemplate.postCommitHook())
+    lazy var postRewriteHookJob = HookInstallJob(repoPath: Path.current + Path(".git"),
+                                                 hookName: "post-rewrite",
+                                                 hookContent: DefaultTemplate.postRewriteHook())
     
     func doAction() {
-        checkGitRepo()
-        installPostCommitHook()
-        installPostWriteHook()
-    }
-    
-    private func checkGitRepo() {
-        if !gitRepoPath.exists {
-            System().printFatalError("Not a git repository.")
-        }
-    }
-    
-    private func installPostCommitHook() {
+        let installer = HookInstaller(system)
+        
         do {
-            try installHook(to: postCommitHookPath, hookContent: postCommitHook)
+            try installer.install([postCommitHookJob, postRewriteHookJob])
         } catch {
             system.printFatalError(error.localizedDescription)
         }
     }
     
-    private func installPostWriteHook() {
-        do {
-            try installHook(to: postRewriteHookPath, hookContent: postRewriteHook)
-        } catch {
-            system.printFatalError(error.localizedDescription)
+}
+
+struct HookInstallJob {
+    
+    let repoPath: Path
+    let hookName: String
+    let hookContent: String
+    
+    var hookDirPath: Path {
+        return repoPath + Path("hooks")
+    }
+    
+    var hookPath: Path {
+        return hookDirPath + Path(hookName)
+    }
+    
+}
+
+class HookInstaller {
+    
+    var system: SystemProtocol
+    
+    init(_ system: SystemProtocol) {
+        self.system = system
+    }
+    
+    func install(_ jobs: [HookInstallJob]) throws {
+        for job in jobs {
+            try checkRepoExist(job)
+            try installHook(to: job.hookPath, hookContent: job.hookContent)
+        }
+    }
+    
+    private func checkRepoExist(_ job: HookInstallJob) throws {
+        if (!job.repoPath.exists) {
+            throw InstallHookCommandActionError.gitRepoNotExist
         }
     }
     
