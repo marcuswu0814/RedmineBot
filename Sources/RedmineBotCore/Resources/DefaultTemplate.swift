@@ -22,7 +22,7 @@ struct DefaultTemplate {
     static func postCommitHook() -> String {
         let hook =
         """
-        redmine-bot runPostCommitHook
+        redmine-bot post-commit-hook
         """
         
         return hook
@@ -31,7 +31,7 @@ struct DefaultTemplate {
     static func postRewriteHook() -> String {
         let hook =
         """
-        redmine-bot runPostRewriteHook
+        redmine-bot post-rewrite-hook
         """
         
         return hook
