@@ -7,6 +7,7 @@ The changelog for `RedmineBot`.
 ## Feature
 
 - Add Version command for version check. [#5](https://github.com/marcuswu0814/RedmineBot/pull/5)
+- Implement install-hook feature. `post-commit` and `post-rewrite` hook will be executed and post commit message to Redmine. [#6](https://github.com/marcuswu0814/RedmineBot/pull/6)
 
 ## CI enhancement
 
