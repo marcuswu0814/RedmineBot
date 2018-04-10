@@ -1,5 +1,13 @@
 extension String {
     
+    static func fakeRepoName() -> String {
+        return "FakeRepo"
+    }
+    
+    static func fakeBranchName() -> String {
+        return "FakeBranch"
+    }
+    
     static func fakeAuthorName() -> String {
         return "Test author name"
     }

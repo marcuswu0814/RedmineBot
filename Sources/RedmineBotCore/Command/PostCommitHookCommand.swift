@@ -28,12 +28,16 @@ class PostCommitHookCommandAction {
         }
         
         let authorName = git.authorName("") ?? "No author name"
+        let repoName = git.repoName()
+        let branchName = git.branchName()
         
         let issuesNumber = processIssuesNumber()
         
         issuesNumber?.forEach({ issueNumber in
             let context = CommentContext(content: commitLog,
-                                         authorName: authorName)
+                                         authorName: authorName,
+                                         gitRepoName: repoName,
+                                         gitBranchName: branchName)
             
             request.send(to: issueNumber, wtih: context)
         })

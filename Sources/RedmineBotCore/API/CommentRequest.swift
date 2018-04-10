@@ -2,10 +2,13 @@ import Foundation
 import Alamofire
 import Stencil
 import PathKit
+import HTMLEntities
 
 struct CommentContext {
     let content: String
     let authorName: String
+    var gitRepoName: String?
+    var gitBranchName: String?
 }
 
 class CommentRequest: NSObject {
@@ -27,17 +30,26 @@ class CommentRequest: NSObject {
     public func send(to issueNumber: Int, wtih context: CommentContext) {
         runner.lock()
         
-        let context = [
-            "content": context.content,
+        let htmlContext = context.content.htmlEscape().replacingOccurrences(of: "\n", with: "<br>")
+        
+        var templateContext = [
+            "content": htmlContext,
             "authorName": context.authorName
         ]
         
-        let path = Path.configFolder()
-        let environment = Environment(loader: FileSystemLoader(paths: [path]))
-        let rendered = try? environment.renderTemplate(name: "Comment.template", context: context)
+        if let branchName = context.gitBranchName {
+            templateContext["branchName"] = branchName
+        }
         
+        if let repoName = context.gitRepoName {
+            templateContext["repoName"] = repoName
+        }
+        
+        let template = Template(templateString: DefaultTemplate.comment())
+        let rendered = try? template.render(templateContext)
+       
         guard let commentInfo = rendered else {
-            system.printFatalError("Rendered error! Check your template file first. 🙏")
+            system.printFatalError("Rendered error. 🙇")
         }
         
         let parameters: Parameters = ["issue": ["notes": commentInfo]]
