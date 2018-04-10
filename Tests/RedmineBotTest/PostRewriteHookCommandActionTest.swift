@@ -13,8 +13,6 @@ class MockCommitsDiffReader: CommitsDiffReader {
 class PostRewriteHookCommandActionTest: XCTestCase {
     
     let config = Config(redmineUrl: "www.redmine.com", apiAccessKey: "FakeAccessKey")
-    let context = CommentContext(content: "Unit test content",
-                                 authorName: "Test user")
     var sut: PostRewriteHookCommandAction?
     var mockRequest: MockCommentRequest?
     

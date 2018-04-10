@@ -5,8 +5,6 @@ import Foundation
 class PostCommitHookCommandActionTest: XCTestCase {
     
     let config = Config(redmineUrl: "www.redmine.com", apiAccessKey: "FakeAccessKey")
-    let context = CommentContext(content: "Unit test content",
-                                 authorName: "Test user")
     var sut: PostCommitHookCommandAction?
     var mockRequest: MockCommentRequest?
     
