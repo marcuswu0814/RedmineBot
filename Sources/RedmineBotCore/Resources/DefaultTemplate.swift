@@ -9,11 +9,15 @@ struct DefaultTemplate {
     static func comment() -> String {
         let template =
         """
-        {{ content }}
+        {{ authorName }} commit{% if repoName %} @ repo: {{ repoName }} {% endif %} {% if branchName %} & branch {{ branchName }} {% endif %}
 
         <br><br>
 
-        <b>Send from {{ authorName }} @ RedmineBot</b>
+        {{ content }}
+
+        <br>
+
+        <b>Send from <a href="https://github.com/marcuswu0814/RedmineBot">RedmineBot</a></b>
         """
         
         return template

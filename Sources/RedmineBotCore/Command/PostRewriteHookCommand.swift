@@ -30,14 +30,26 @@ class PostRewriteHookCommandAction {
     
     func doAction() {
         let commitsDiff = provider.commitsDiff()
+        let repoName = git.repoName()
+        let branchName = git.branchName()
         
         commitsDiff.forEach { commitDiff in
             guard let issuesNumber = processIssuesNumber(commitDiff) else {
                 return
             }
             
-            let context = CommentContext(content: commitMessage(commitDiff),
-                                         authorName: authorName(commitDiff))
+            let content =
+            """
+            Commit already rewrite,
+            \(commitDiff.oldHash) -> \(commitDiff.newHash)
+            
+            \(commitMessage(commitDiff))
+            """
+            
+            let context = CommentContext(content: content,
+                                         authorName: authorName(commitDiff),
+                                         gitRepoName: repoName,
+                                         gitBranchName: branchName)
             
             issuesNumber.forEach({ issueNumber in
                 request.send(to: issueNumber, wtih: context)

@@ -10,8 +10,7 @@ public class SetupCommand: CommandProtocol {
                                    Argument<String>("apiAccessKey", description: "Your access key from account setting")
         ) { (redmineUrl, apiAccessKey) in
             let action = SetupCommandAction(Config(redmineUrl: redmineUrl, apiAccessKey: apiAccessKey),
-                                            configPath: Path.redmineConfig(),
-                                            defaultTemplatePath: Path.commentTemplate())
+                                            configPath: Path.redmineConfig())
             
             action.doAction()
         }
@@ -28,17 +27,14 @@ class SetupCommandAction {
     }()
     var config: Config
     var configPath: Path
-    var defaultTemplatePath: Path
     
-    init(_ config: Config, configPath: Path, defaultTemplatePath: Path) {
+    init(_ config: Config, configPath: Path) {
         self.config = config
         self.configPath = configPath
-        self.defaultTemplatePath = defaultTemplatePath
     }
     
     func doAction() {
         setupConfig()
-        setupDefaultTemplate()
         checkSetupFileExist()
     }
     
@@ -61,16 +57,8 @@ class SetupCommandAction {
         }
     }
     
-    private func setupDefaultTemplate() {
-        do {
-            try defaultTemplatePath.write(DefaultTemplate.comment())
-        } catch {
-            system.printFatalError("Create default template file to path \(defaultTemplatePath) fail.")
-        }
-    }
-    
     private func checkSetupFileExist() {
-        if defaultTemplatePath.exists && configPath.exists {
+        if configPath.exists {
             system.printSuccess("Setup success!")
         }
     }

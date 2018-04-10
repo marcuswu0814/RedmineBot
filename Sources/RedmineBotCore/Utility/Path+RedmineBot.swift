@@ -17,10 +17,6 @@ extension Path {
         return configFolder
     }
     
-    public static func commentTemplate() -> Path {
-        return configFolder() + Path("Comment.template")
-    }
-    
     public static func redmineConfig() -> Path {
         return configFolder() + Path("redmineConfig")
     }
