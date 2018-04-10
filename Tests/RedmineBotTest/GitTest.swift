@@ -27,12 +27,24 @@ class GitTest: XCTestCase {
         XCTAssertTrue(containsAuthorName!)
     }
     
-    func test__sholdGetCurrentCommitTitle() {
+    func test__shouldGetCurrentCommitTitle() {
         let commitTitle = Git.commitTitle("")
 
         let containsCommitTitle = commitTitle?.contains(TempGitRepo.commitMessage)
         
         XCTAssertTrue(containsCommitTitle!)
+    }
+    
+    func test_shouldGetCurrentBranchName() {
+        let branchName = Git.branchName()
+        
+        XCTAssertTrue(branchName == "master")
+    }
+    
+    func test_shouldGetCurrentRepoName() {
+        let repoName = Git.repoName()
+        
+        XCTAssertTrue(repoName == TempGitRepo.tempDir.lastComponent)
     }
  
     override class func tearDown() {
