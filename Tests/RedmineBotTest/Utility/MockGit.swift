@@ -2,6 +2,14 @@
 
 class MockGit: GitProtocol {
     
+    static func repoName() -> String? {
+        return String.fakeRepoName()
+    }
+    
+    static func branchName() -> String? {
+        return String.fakeBranchName()
+    }
+    
     static func authorName(_ sha: String) -> String? {
         return String.fakeAuthorName()
     }
