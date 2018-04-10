@@ -19,7 +19,7 @@ class MockGit: GitProtocol {
     }
     
     static func commitMessage(_ sha: String) -> String? {
-        return String.fakecommitMessage()
+        return String.fakeCommitMessage()
     }
     
 }
