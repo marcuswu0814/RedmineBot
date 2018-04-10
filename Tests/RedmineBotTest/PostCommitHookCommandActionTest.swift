@@ -8,7 +8,7 @@ class PostCommitHookCommandActionTest: XCTestCase {
     var sut: PostCommitHookCommandAction?
     var mockRequest: MockCommentRequest?
     
-    func test__givenRequestinformation__shouldSendRequest() {
+    func test__givenRequestInformation__shouldSendRequest() {
         mockRequest = MockCommentRequest(config)
 
         sut = PostCommitHookCommandAction()
@@ -18,7 +18,7 @@ class PostCommitHookCommandActionTest: XCTestCase {
         
         XCTAssertTrue(mockRequest?.issueNumber == 13579)
         XCTAssertTrue(mockRequest?.context?.authorName == String.fakeAuthorName())
-        XCTAssertTrue(mockRequest?.context?.content == String.fakecommitMessage())
+        XCTAssertTrue(mockRequest?.context?.content == String.fakeCommitMessage())
     }
     
 }

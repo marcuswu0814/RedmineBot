@@ -16,7 +16,7 @@ extension String {
         return "[#13579] This is test commit title"
     }
     
-    static func fakecommitMessage() -> String {
+    static func fakeCommitMessage() -> String {
         let fakecommitMessage =
         """
         commit newHash
