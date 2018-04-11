@@ -2,7 +2,7 @@
 
 The changelog for `RedmineBot`. 
 
-## 0.0.2 (upcoming release)
+## 0.1.0
 
 ## Feature
 
