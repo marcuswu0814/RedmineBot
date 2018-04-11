@@ -22,8 +22,8 @@ extension VersionProtocol {
 struct Version: VersionProtocol {
    
     var major = 0
-    var minor = 0
-    var patch = 1
+    var minor = 1
+    var patch = 0
     
 }
 
