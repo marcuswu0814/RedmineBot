@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CircuitBreaker",
+        "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
+        "state": {
+          "branch": null,
+          "revision": "81581e3fb094ab4879aa2c5ce54201f1dbce0a7f",
+          "version": "5.0.1"
+        }
+      },
+      {
         "package": "Commander",
         "repositoryURL": "https://github.com/kylef/Commander",
         "state": {
@@ -26,6 +35,15 @@
           "branch": null,
           "revision": "9112c12bc5cc2b20fcaf1393c65a9cbbfda5a155",
           "version": "3.0.10"
+        }
+      },
+      {
+        "package": "LoggerAPI",
+        "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
+        "state": {
+          "branch": null,
+          "revision": "ee0084cbb8bace59b3409cec05bedc5d2e97f8b7",
+          "version": "1.7.2"
         }
       },
       {
@@ -62,6 +80,15 @@
           "branch": "master",
           "revision": "91847208a3137cb572c4ab413bf54f31ee0e93a8",
           "version": null
+        }
+      },
+      {
+        "package": "SwiftyRequest",
+        "repositoryURL": "https://github.com/IBM-Swift/SwiftyRequest.git",
+        "state": {
+          "branch": null,
+          "revision": "82d49d1bde19c4acfc63c276b67c8a25ac434e52",
+          "version": "1.1.2"
         }
       }
     ]

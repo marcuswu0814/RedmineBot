@@ -1,5 +1,5 @@
 import Foundation
-import Alamofire
+import SwiftyRequest
 import Stencil
 import PathKit
 import HTMLEntities
@@ -52,25 +52,29 @@ class CommentRequest: NSObject {
             system.printFatalError("Rendered error. 🙇")
         }
         
-        let parameters: Parameters = ["issue": ["notes": commentInfo]]
-        let url = config.redmineUrl + "/issues/\(issueNumber).json?key=\(config.apiAccessKey)"
+        let url = config.redmineUrl + "/issues/\(issueNumber).json"
         
-        Alamofire.request(url,
-                          method: .put,
-                          parameters: parameters,
-                          encoding: URLEncoding.httpBody)
-            .validate(statusCode: 200..<300)
-            .responseString { response in
-                if let error = response.error {
-                    self.system.printWarning("Got some network error. 🙇")
-                    self.system.printWarning("Error: \n\(error)")
-                } else {
-                    self.system.printSuccess("Comment send success!")
-                }
-                
-                self.runner.unlock()
+        let parameters = ["issue": ["notes": commentInfo]]
+        
+        guard let data = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {
+            return
         }
         
+        let request = RestRequest(method: .put, url: url)
+        request.messageBody = data
+        
+        request.responseString(queryItems: [URLQueryItem(name: "key", value: config.apiAccessKey)]) { response in
+            switch response.result {
+            case .success:
+                self.system.printSuccess("Comment send success!")
+            case .failure(let error):
+                self.system.printWarning("Got some network error. 🙇")
+                self.system.printWarning("Error: \n\(error)")
+            }
+            
+            self.runner.unlock()
+        }
+
         runner.wait()
     }
     
