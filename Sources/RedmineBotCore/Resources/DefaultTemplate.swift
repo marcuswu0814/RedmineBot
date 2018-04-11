@@ -9,7 +9,7 @@ struct DefaultTemplate {
     static func comment() -> String {
         let template =
         """
-        {{ authorName }} commit{% if repoName %} @ repo: {{ repoName }} {% endif %} {% if branchName %} & branch {{ branchName }} {% endif %}
+        <b>{{ authorName }} commit{% if repoName %} @ repo: {{ repoName }} {% endif %} {% if branchName %} & branch {{ branchName }} {% endif %}</b>
 
         <br><br>
 
