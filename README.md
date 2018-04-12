@@ -18,15 +18,69 @@ Any other suggestion? Feel free to create an issue or PR. 🙏
 ## Installation
 
 ### macOS
-### Homebrew
+#### Homebrew
 
 ```bash
 $ brew install marcuswu0814/homebrew-taps/redminebot
+
+# try it
+$ redmine-bot version
 ```
 
-### Linux
+Done. 🎉
 
-Currently not support yet.
+### Ubuntu
+#### Manually
+
+**Step 1**
+
+Install all `swift` dependency.
+
+```bash
+$ sudo apt-get install clang libicu-dev git build-essential libcurl4-openssl-dev
+```
+
+**Step 2**
+
+Install `swiftenv`, see install detail on [document](https://swiftenv.fuller.li/en/latest/installation.html#uninstalling-swiftenv)
+
+For example, use `zsh`
+
+```bash
+$ git clone https://github.com/kylef/swiftenv.git ~/.swiftenv
+
+$ echo 'export SWIFTENV_ROOT="$HOME/.swiftenv"' >> ~/.zshenv
+$ echo 'export PATH="$SWIFTENV_ROOT/bin:$PATH"' >> ~/.zshenv
+$ echo 'eval "$(swiftenv init -)"' >> ~/.zshenv
+```
+
+Then restart shell.
+
+**Step 3**
+
+Use `swiftenv` to install `swift` version 4.0.3
+
+```bash
+$ swiftenv install 4.0.3
+```
+**Step 4**
+
+Clone `RedmineBot` source code and build it with `swift`
+
+```bash
+$ git clone https://github.com/marcuswu0814/RedmineBot.git
+$ cd RedmineBot/
+$ make build-for-linux
+
+# The bin name must be `edmine-bot`, don't rename it.
+$ sudo mv .build/release/RedmineBot /usr/bin/redmine-bot
+
+# try it
+$ redmine-bot version
+```
+Done. 🎉 Then you can remove source code.
+
+***Note: Some linux build issue tracking on [#10](https://github.com/marcuswu0814/RedmineBot/issues/10).***
 
 ## Setup
 
