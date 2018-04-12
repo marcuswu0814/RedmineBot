@@ -6,6 +6,9 @@ PROD_NAME_UNDERLINE=redmine-bot
 build:
 	swift build --disable-sandbox -c release -Xswiftc -static-stdlib
 
+build-for-linux:
+	swift build --disable-sandbox -c release
+
 run:
 	.build/release/$(PROD_NAME)
 
