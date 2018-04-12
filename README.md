@@ -72,7 +72,7 @@ $ git clone https://github.com/marcuswu0814/RedmineBot.git
 $ cd RedmineBot/
 $ make build-for-linux
 
-# The bin name must be `edmine-bot`, don't rename it.
+# The bin name must be `redmine-bot`, don't rename it.
 $ sudo mv .build/release/RedmineBot /usr/bin/redmine-bot
 
 # try it
