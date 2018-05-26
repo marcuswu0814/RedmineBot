@@ -1,5 +1,6 @@
 import Foundation
 import PathKit
+import SwiftCLIToolbox
 @testable import RedmineBotCore
 
 struct TempGitRepo {

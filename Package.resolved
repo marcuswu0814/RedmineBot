@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "bfb9f132cdfa1033bea847e4cf9cfde4fee254e3",
-          "version": "4.7.0"
-        }
-      },
-      {
         "package": "CircuitBreaker",
         "repositoryURL": "https://github.com/IBM-Swift/CircuitBreaker.git",
         "state": {
@@ -29,21 +20,12 @@
         }
       },
       {
-        "package": "HTMLEntities",
-        "repositoryURL": "https://github.com/IBM-Swift/swift-html-entities",
-        "state": {
-          "branch": null,
-          "revision": "9112c12bc5cc2b20fcaf1393c65a9cbbfda5a155",
-          "version": "3.0.10"
-        }
-      },
-      {
         "package": "LoggerAPI",
         "repositoryURL": "https://github.com/IBM-Swift/LoggerAPI.git",
         "state": {
           "branch": null,
-          "revision": "ee0084cbb8bace59b3409cec05bedc5d2e97f8b7",
-          "version": "1.7.2"
+          "revision": "5041f2673aa75d6e973d9b6bd3956bc5068387c8",
+          "version": "1.7.3"
         }
       },
       {
@@ -60,8 +42,8 @@
         "repositoryURL": "https://github.com/onevcat/Rainbow",
         "state": {
           "branch": null,
-          "revision": "f69961599ad524251d677fbec9e4bac57385d6fc",
-          "version": "3.1.1"
+          "revision": "797a68d0a642609424b08f11eb56974a54d5f6e2",
+          "version": "3.1.4"
         }
       },
       {
@@ -78,7 +60,25 @@
         "repositoryURL": "https://github.com/kylef/Stencil",
         "state": {
           "branch": "master",
-          "revision": "91847208a3137cb572c4ab413bf54f31ee0e93a8",
+          "revision": "2e18892f4c02406a90cb96b2ebb1a2438c6655da",
+          "version": null
+        }
+      },
+      {
+        "package": "HTMLEntities",
+        "repositoryURL": "https://github.com/IBM-Swift/swift-html-entities",
+        "state": {
+          "branch": null,
+          "revision": "9112c12bc5cc2b20fcaf1393c65a9cbbfda5a155",
+          "version": "3.0.10"
+        }
+      },
+      {
+        "package": "SwiftCLIToolbox",
+        "repositoryURL": "https://github.com/marcuswu0814/SwiftCLIToolbox",
+        "state": {
+          "branch": "master",
+          "revision": "18ce2bcc328502db913fb26cfd674593acfb637d",
           "version": null
         }
       },
