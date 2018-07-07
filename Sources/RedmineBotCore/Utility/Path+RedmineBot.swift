@@ -5,7 +5,7 @@ extension Path {
     public static func configFolder() -> Path {
         let configFolder = Path.home + Path(".RedmineBot")
         
-        if (!configFolder.exists) {
+        if !configFolder.exists {
             do {
                 try configFolder.mkdir()
             } catch {
