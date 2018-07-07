@@ -78,7 +78,7 @@ class HookInstaller {
     }
     
     private func checkRepoExist(_ job: HookInstallJob) throws {
-        if (!job.repoPath.exists) {
+        if !job.repoPath.exists {
             throw InstallHookCommandActionError.gitRepoNotExist
         }
     }
