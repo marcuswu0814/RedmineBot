@@ -2,7 +2,7 @@ import Foundation
 import Commander
 import PathKit
 
-public class UnInstallHookCommand: CommandProtocol {
+public class UninstallHookCommand: CommandProtocol {
     
     public static func make() -> CommandType {
         let uninstallCommand = command {
@@ -16,7 +16,7 @@ public class UnInstallHookCommand: CommandProtocol {
     
 }
 
-enum UnInstallHookCommandActionError: Error {
+enum UninstallHookCommandActionError: Error {
     case gitRepoNotExist
     case deleteHookFileFail
 }
@@ -33,7 +33,7 @@ class UnInstallHookCommandAction {
                                                  hookContent: DefaultTemplate.postRewriteHook())
     
     func doAction() {
-        let uninstaller = UnHookInstaller(system)
+        let uninstaller = HookUninstaller(system)
         
         do {
             try uninstaller.uninstall([postCommitHookJob, postRewriteHookJob])
@@ -43,7 +43,7 @@ class UnInstallHookCommandAction {
     }
 }
 
-class UnHookInstaller {
+class HookUninstaller {
     
     var system: SystemProtocol
     
@@ -60,7 +60,7 @@ class UnHookInstaller {
     
     private func checkRepoExist(_ job: HookInstallJob) throws {
         if (!job.repoPath.exists) {
-            throw UnInstallHookCommandActionError.gitRepoNotExist
+            throw UninstallHookCommandActionError.gitRepoNotExist
         }
     }
     
@@ -76,7 +76,7 @@ class UnHookInstaller {
         do {
             try path.delete()
         } catch {
-            throw UnInstallHookCommandActionError.deleteHookFileFail
+            throw UninstallHookCommandActionError.deleteHookFileFail
         }
         system.printWarning("Hook \(path.lastComponent) uninstall to path \(path) success.")
     }
