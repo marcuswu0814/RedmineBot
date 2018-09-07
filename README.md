@@ -96,12 +96,6 @@ $ redmine-bot install-hook
 
 `Redmine-bot` will install `post-commit` and `post-rewrite` hook in specific repo. after execute `install-hook` command.
 
-```bash
-$ redmine-bot uninstall-hook
-```
-
-`Redmine-bot` will delete `post-commit` and `post-rewrite` hook after executing `uninstall-hook` command.
-
 ## Usage
 
 ### Example
@@ -125,6 +119,14 @@ $ git pull --rebase
 If pull repo. from git server and not fast forward, commit will re-write, and `post-rewrite` hook run.
 
 Just like `post-commit`, `RedmineBot` will post a new note to let you know commit sha is updated.
+
+## Uninstall
+
+```bash
+$ redmine-bot uninstall-hook
+```
+
+`Redmine-bot` will delete `post-commit` and `post-rewrite` hook after executing `uninstall-hook` command.
 
 ## Contact
 

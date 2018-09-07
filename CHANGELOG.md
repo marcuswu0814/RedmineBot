@@ -1,6 +1,16 @@
 # CHANGELOG
 
-The changelog for `RedmineBot`. 
+The changelog for `RedmineBot`.
+
+## 0.2.0
+
+## Feature
+
+- Implement uninstall-hook feature. [#14](https://github.com/marcuswu0814/RedmineBot/pull/14)
+
+## Enhancement
+
+- Remove unnecessary parentheses. [#17](https://github.com/marcuswu0814/RedmineBot/pull/17)
 
 ## 0.1.0
 
