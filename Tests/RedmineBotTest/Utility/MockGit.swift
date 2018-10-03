@@ -1,3 +1,4 @@
+import SwiftCLIToolbox
 @testable import RedmineBotCore
 
 class MockGit: GitProtocol {

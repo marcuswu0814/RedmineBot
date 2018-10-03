@@ -3,6 +3,7 @@ import SwiftyRequest
 import Stencil
 import PathKit
 import HTMLEntities
+import SwiftCLIToolbox
 
 struct CommentContext {
     let content: String

@@ -1,6 +1,7 @@
 import Foundation
 import PathKit
 import Commander
+import SwiftCLIToolbox
 
 public class PostRewriteHookCommand: CommandProtocol {
     

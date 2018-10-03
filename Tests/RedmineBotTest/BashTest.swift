@@ -1,6 +1,7 @@
 import XCTest
 import Foundation
 import PathKit
+import SwiftCLIToolbox
 @testable import RedmineBotCore
 
 class BashTest: XCTestCase {

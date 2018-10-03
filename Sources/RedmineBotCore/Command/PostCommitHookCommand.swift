@@ -1,6 +1,7 @@
 import Foundation
 import Commander
 import PathKit
+import SwiftCLIToolbox
 
 public class PostCommitHookCommand: CommandProtocol {
     
